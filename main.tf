@@ -43,3 +43,13 @@ resource "aws_iam_group" "musicians" {
   path = "/users/"
 
 }
+
+resource "aws_iam_group_membership" "team" {
+  name = "team1"
+
+  users = [
+    aws_iam_user.lb.name
+  ]
+
+  group = aws_iam_group.musicians.name
+}
