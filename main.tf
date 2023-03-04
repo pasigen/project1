@@ -20,3 +20,20 @@ resource "aws_iam_user" "lb" {
     tag-key = "music"
   }
 }
+
+resource "aws_iam_user_policy" "lb2" {
+  name   = "administrator_access"
+  user   = aws_iam_user.lb.name
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "*",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+}
