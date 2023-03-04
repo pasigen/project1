@@ -37,3 +37,9 @@ resource "aws_iam_user_policy" "lb2" {
     ]
   })
 }
+
+resource "aws_iam_group" "musicians" {
+  name = "musicians"
+  path = "/users/"
+
+}
