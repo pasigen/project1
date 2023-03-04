@@ -53,3 +53,23 @@ resource "aws_iam_group_membership" "team" {
 
   group = aws_iam_group.musicians.name
 }
+
+resource "aws_iam_group_policy" "lb3" {
+  name  = "administrator_access"
+  group = aws_iam_group.musicians.name
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "*",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+}
